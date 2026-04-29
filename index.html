@@ -17,17 +17,23 @@ html,body{
   overflow-x:hidden;
 }
 
+/* Container to keep content clean on high-res screens */
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Sticky Countdown Bar */
 #top-countdown {
   position: sticky;
   top: 0;
   z-index: 1000;
   text-align: center;
-  background: rgba(255, 77, 166, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 12px;
+  background: rgba(255, 77, 166, 0.25);
+  backdrop-filter: blur(15px);
+  padding: 15px;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border-bottom: 2px solid #ff4da6;
   color: #ffd6eb;
   text-shadow: 0 0 10px #ff4da6;
@@ -35,32 +41,32 @@ html,body{
 
 .banner{
   text-align:center;
-  font-size:38px;
-  padding:30px 10px 10px 10px;
+  font-size:42px;
+  padding:40px 10px 10px 10px;
   font-weight:800;
   text-shadow:0 0 25px #ff4da6;
 }
 
 #main-countdown-container {
   text-align:center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 #main-countdown {
-  font-size:28px;
+  font-size:36px;
   font-weight: bold;
   color:#ff4da6;
   text-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
 }
 
 .countdown-label {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   color: #ff4da6;
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff0080;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
   animation: glow-pulse 2s ease-in-out infinite alternate;
 }
 
@@ -70,42 +76,42 @@ html,body{
 }
 
 .card{
-  margin:20px;
-  padding:25px;
+  margin:25px;
+  padding:35px;
   background:rgba(255,255,255,0.08);
-  border-radius:25px;
+  border-radius:30px;
   line-height:1.8;
   text-align:center;
   border: 1px solid rgba(255, 77, 166, 0.2);
+  font-size: 1.1rem;
 }
 
-/* Updated Gallery for 2048x1602 optimization */
+/* Optimized Gallery for 2316x3088 display */
 .gallery{
   display:grid;
-  /* Larger columns for high res */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 25px;
+  padding: 15px;
 }
 .gallery img{
   width:100%;
-  /* Increased height to look better on 1602px vertical resolution */
-  height: 400px; 
+  height: 600px; /* Taller images for vertical resolution */
   object-fit:cover;
-  border-radius:25px;
-  border: 2px solid rgba(255, 77, 166, 0.3);
+  border-radius:30px;
+  border: 3px solid rgba(255, 77, 166, 0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   animation:zoom 6s infinite alternate;
 }
 
 @keyframes zoom{
   from{transform:scale(1)}
-  to{transform:scale(1.05)}
+  to{transform:scale(1.03)}
 }
 
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:18px;
+  font-size:24px;
   animation:float 6s linear infinite;
   z-index: 997;
 }
@@ -116,18 +122,18 @@ html,body{
 #popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.95);
+  background:rgba(0,0,0,0.96);
   display:none; 
   align-items:center;
   justify-content:center;
   z-index:9999;
 }
 #popup .box{
-  padding:40px;
+  padding:50px;
   background:#1a001a;
-  border-radius:30px;
+  border-radius:40px;
   text-align:center;
-  box-shadow:0 0 50px #ff4da6;
+  box-shadow:0 0 60px #ff4da6;
   border: 2px solid #ff4da6;
 }
 
@@ -138,14 +144,15 @@ html,body{
   z-index:998;
 }
 
-/* Responsive adjustments for standard mobile */
-@media(max-width:600px){
-  .banner{font-size:28px}
-  #top-countdown{font-size: 0.85rem;}
-  #main-countdown{font-size: 22px;}
+/* Mobile/Phone Specific Overrides */
+@media(max-width:800px){
+  .banner{font-size:32px}
+  #top-countdown{font-size: 0.95rem; padding: 10px;}
+  #main-countdown{font-size: 26px;}
   .countdown-label{font-size: 14px;}
-  .gallery img{height:250px}
-  .gallery{grid-template-columns: 1fr 1fr;}
+  .gallery{grid-template-columns: 1fr;} /* Stack photos on mobile */
+  .gallery img{height:450px;} 
+  .card{padding: 20px; margin: 15px;}
 }
 </style>
 </head>
@@ -154,41 +161,43 @@ html,body{
 
 <div id="top-countdown">Calculating...</div>
 
-<div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
+<div class="main-wrapper">
+  <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
 
-<div id="main-countdown-container">
-  <div id="main-countdown">00d 00h 00m 00s</div>
-  <span class="countdown-label">until your birthday 25 May 🎂</span>
-</div>
+  <div id="main-countdown-container">
+    <div id="main-countdown">00d 00h 00m 00s</div>
+    <span class="countdown-label">until your birthday 25 May 🎂</span>
+  </div>
 
-<div class="card">
-<p>
-Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
-My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
-Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
-I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
-On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
-I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
-<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
-Once again Happy Birthday my CUTIE 🤍🎀🎀
-</p>
-</div>
+  <div class="card">
+  <p>
+  Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
+  My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
+  Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
+  I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
+  On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
+  I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
+  <b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
+  Once again Happy Birthday my CUTIE 🤍🎀🎀
+  </p>
+  </div>
 
-<div class="card">
-<div class="gallery">
-  <img src="img1.jpeg" alt="Photo 1">
-  <img src="img2.jpeg" alt="Photo 2">
-  <img src="img3.jpeg" alt="Photo 3">
-  <img src="img4.jpeg" alt="Photo 4">
-  <img src="img5.jpeg" alt="Photo 5">
-  <img src="img6.jpeg" alt="Photo 6">
-</div>
+  <div class="card">
+  <div class="gallery">
+    <img src="img1.jpeg" alt="Photo 1">
+    <img src="img2.jpeg" alt="Photo 2">
+    <img src="img3.jpeg" alt="Photo 3">
+    <img src="img4.jpeg" alt="Photo 4">
+    <img src="img5.jpeg" alt="Photo 5">
+    <img src="img6.jpeg" alt="Photo 6">
+  </div>
+  </div>
 </div>
 
 <div id="popup">
   <div class="box">
-    <h1 style="color:#ff4da6; text-shadow: 0 0 10px #ff4da6;">🎂 Happy Birthday 🎂</h1>
-    <p style="font-size: 1.2rem;">
+    <h1 style="color:#ff4da6; text-shadow: 0 0 15px #ff4da6;">🎂 Happy Birthday 🎂</h1>
+    <p style="font-size: 1.4rem; color: #fff;">
       Happy Birthday Moynapakhiiiii &lt;3<br><br>
       I love you FOREVER my PRETTIEST WIFEY 💋
     </p>
@@ -224,7 +233,7 @@ setInterval(()=>{
 },400);
 
 function heartFirework(){
-  for(let i=0; i<180; i++){
+  for(let i=0; i<200; i++){
     const t = Math.random() * Math.PI * 2;
     const r = 16 * (1 - Math.sin(t));
     parts.push({
@@ -242,10 +251,10 @@ function animate(){
   parts.forEach((p,i)=>{
     p.x += p.vx * 0.05;
     p.y += p.vy * 0.05;
-    p.a -= 0.01;
+    p.a -= 0.008;
     ctx.fillStyle = `rgba(255,80,150,${p.a})`;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+    ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2);
     ctx.fill();
     if(p.a <= 0) parts.splice(i,1);
   });
