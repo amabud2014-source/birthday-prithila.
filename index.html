@@ -39,17 +39,25 @@ html,body{
   font-size:38px;
   padding:30px 10px 10px 10px;
   font-weight:800;
-  text-shadow:0 0-25px #ff4da6;
+  text-shadow:0 0 25px #ff4da6;
 }
 
-/* Main Body Countdown (Replacing the old clock) */
-#main-countdown {
+/* Main Body Countdown */
+#main-countdown-container {
   text-align:center;
-  font-size:24px;
+  margin-bottom: 20px;
+}
+#main-countdown {
+  font-size:28px;
   font-weight: bold;
   color:#ff4da6;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px rgba(255, 77, 166, 0.5);
+  text-shadow: 0 0 15px rgba(255, 77, 166, 0.6);
+}
+.countdown-label {
+  font-size: 16px;
+  color: #ffd6eb;
+  display: block;
+  margin-top: 5px;
 }
 
 /* Card */
@@ -123,8 +131,8 @@ html,body{
 /* Mobile Adjustments */
 @media(max-width:600px){
   .banner{font-size:28px}
-  #top-countdown{font-size: 0.9rem;}
-  #main-countdown{font-size: 18px;}
+  #top-countdown{font-size: 0.85rem;}
+  #main-countdown{font-size: 22px;}
   .gallery img{height:130px}
 }
 </style>
@@ -136,7 +144,10 @@ html,body{
 
 <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
 
-<div id="main-countdown">00d 00h 00m 00s</div>
+<div id="main-countdown-container">
+  <div id="main-countdown">00d 00h 00m 00s</div>
+  <span class="countdown-label">until your birthday 25 May 🎂</span>
+</div>
 
 <div class="card">
 <p>
@@ -236,7 +247,7 @@ function animate(){
 }
 animate();
 
-/* --- COMBINED COUNTDOWN LOGIC --- */
+/* --- COUNTDOWN LOGIC --- */
 const targetDate = new Date("May 25, 2026 00:00:00").getTime();
 
 const timer = setInterval(() => {
@@ -246,6 +257,7 @@ const timer = setInterval(() => {
   if (diff <= 0) {
     topBar.innerHTML = "🎉 HAPPY BIRTHDAY PRITHILA! ❤️";
     mainDisplay.innerHTML = "🎉 IT'S YOUR SPECIAL DAY! 🎂";
+    document.querySelector('.countdown-label').style.display = 'none';
     clearInterval(timer);
     return;
   }
@@ -257,8 +269,8 @@ const timer = setInterval(() => {
 
   const timeString = `${d}d ${h}h ${m}m ${s}s`;
   
-  topBar.innerHTML = `⏳ ${timeString} until your Birthday! 🎂`;
-  mainDisplay.innerHTML = `⏳ ${timeString} ⏳`;
+  topBar.innerHTML = `⏳ ${timeString} until your birthday 25 May 🎂`;
+  mainDisplay.innerHTML = timeString;
 }, 1000);
 
 window.addEventListener('resize', () => {
