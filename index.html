@@ -27,6 +27,13 @@ html,body{
   text-shadow:0 0 25px #ff4da6;
 }
 
+/* Clock */
+#clock{
+  text-align:center;
+  font-size:18px;
+  color:#ffd6eb;
+}
+
 /* Countdown */
 #countdown{
   margin:20px;
@@ -87,6 +94,7 @@ html,body{
   justify-content:center;
   z-index:999;
 }
+
 #popup .box{
   padding:30px;
   background:#1a001a;
@@ -114,24 +122,13 @@ html,body{
 <body>
 
 <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
+<div id="clock"></div>
 <div id="countdown"></div>
 
 <div class="card">
 <p>
 Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
-
-My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
-
-Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
-
-I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
-
-On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
-
-I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
-
-<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
-Once again Happy Birthday my CUTIE 🤍🎀🎀
+I LOVE YOU so much Jaanpakhiii ❤️❤️❤️
 </p>
 </div>
 
@@ -160,6 +157,16 @@ Once again Happy Birthday my CUTIE 🤍🎀🎀
 <canvas id="fireworks"></canvas>
 
 <script>
+const popup=document.getElementById("popup");
+
+/* SHOW POPUP ON PAGE LOAD (4 sec) */
+window.onload = () => {
+  popup.style.display="flex";
+  setTimeout(()=>{
+    popup.style.display="none";
+  },4000);
+};
+
 /* Floating hearts */
 setInterval(()=>{
   const h=document.createElement("div");
@@ -168,7 +175,15 @@ setInterval(()=>{
   h.innerHTML="💖";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},600);
+},400);
+
+/* Clock */
+function clock(){
+  const d=new Date();
+  document.getElementById("clock").innerHTML=
+    `🕒 ${d.toLocaleTimeString()}<br>📅 ${d.toDateString()}`;
+}
+setInterval(clock,1000); clock();
 
 /* Fireworks */
 const canvas=document.getElementById("fireworks");
@@ -207,39 +222,30 @@ function animate(){
 }
 animate();
 
-/* 🎂 Dynamic Countdown */
+/* Countdown */
+const birthday = new Date("2025-05-25T00:00:00").getTime();
 const countdown=document.getElementById("countdown");
-const popup=document.getElementById("popup");
 let done=false;
-
-function getNextBirthday(){
-  const now = new Date();
-  let year = now.getFullYear();
-
-  let birthday = new Date(year, 4, 25, 0, 0, 0);
-
-  if(now > birthday){
-    birthday = new Date(year + 1, 4, 25, 0, 0, 0);
-  }
-
-  return birthday.getTime();
-}
-
-let birthday = getNextBirthday();
 
 const timer=setInterval(()=>{
   const now=Date.now();
   const diff=birthday-now;
 
   if(diff<=0){
-    countdown.innerHTML="🎉 Happy Birthday Moynapakhiiiii 💋";
+    countdown.innerHTML=
+      "🎉 Happy Birthday Moynapakhiiiii &lt;3<br>I love you FOREVER my PRETTIEST WIFEY 💋";
 
     if(!done){
       done=true;
       popup.style.display="flex";
       heartFirework();
+
+      /* POPUP 4 SECONDS */
+      setTimeout(()=>{
+        popup.style.display="none";
+      },4000);
+
       clearInterval(timer);
-      setTimeout(()=>popup.style.display="none",4000);
     }
     return;
   }
@@ -250,7 +256,7 @@ const timer=setInterval(()=>{
   const s=Math.floor(diff%60000/1000);
 
   countdown.innerHTML=
-    `⏳ ${d}d ${h}h ${m}m ${s}s until 25 May 🎂`;
+    `⏳ ${d}d ${h}h ${m}m ${s}s until your birthday 🎂`;
 },1000);
 </script>
 
