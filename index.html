@@ -2,209 +2,209 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>Happy Birthday PRITHILA 🎀</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-html,body{width:100%;height:100%;overflow-x:hidden;background:#0b0014;color:white;}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle at top,#ff4da6,#0b0014);
-z-index:-1;
+<style>
+*{box-sizing:border-box;}
+html,body{
+  margin:0; padding:0;
+  width:100%; height:100%;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#1a001a,#000);
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* Banner */
+/* ❤️ Floating Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:floatUp 6s linear infinite;
+  opacity:0.8;
+}
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* 🎂 Banner */
 .banner{
-text-align:center;
-padding:40px 10px;
-font-size:40px;
-font-weight:bold;
-animation:glow 2s infinite alternate;
+  text-align:center;
+  font-size:42px;
+  font-weight:800;
+  padding:40px 10px;
+  animation:glow 2s infinite alternate;
 }
 @keyframes glow{
-from{text-shadow:0 0 10px pink;}
-to{text-shadow:0 0 30px hotpink;}
+  from{text-shadow:0 0 10px #ff4da6;}
+  to{text-shadow:0 0 30px #ff99cc;}
 }
 
-/* Floating hearts */
-.heart{
-position:fixed;
-bottom:-20px;
-font-size:20px;
-animation:float 6s linear infinite;
-}
-@keyframes float{
-to{transform:translateY(-120vh);opacity:0;}
-}
-
-/* Card */
+/* 🌸 Card */
 .card{
-background:rgba(255,255,255,0.1);
-margin:20px;
-padding:25px;
-border-radius:25px;
-backdrop-filter:blur(8px);
-box-shadow:0 0 20px rgba(255,105,180,.4);
+  background:rgba(255,255,255,0.08);
+  margin:20px;
+  padding:25px;
+  border-radius:25px;
+  backdrop-filter:blur(8px);
+  animation:fadeUp 2s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* Countdown */
-#countdown{
-text-align:center;
-font-size:22px;
-margin-top:10px;
+.card h2{
+  text-align:center;
+  color:#ffb3d9;
 }
 
-/* Gallery */
+.card p{
+  line-height:1.8;
+  font-size:16px;
+  text-align:center;
+}
+
+/* 📸 Gallery */
 .gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-gap:12px;
-margin-top:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-top:20px;
 }
 .gallery img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:18px;
-animation:fadeZoom 1.5s ease;
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:20px;
+  animation:zoom 6s infinite alternate;
 }
-@keyframes fadeZoom{
-from{opacity:0;transform:scale(.8);}
-to{opacity:1;transform:scale(1);}
+@keyframes zoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.1);}
 }
 
-/* Popup */
-#popup{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.8);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:999;
+/* ⏳ Countdown */
+#countdown{
+  text-align:center;
+  font-size:20px;
+  margin:20px;
+  color:#ffd1ea;
 }
-#popupContent{
-background:#ff2f92;
-padding:30px;
-border-radius:25px;
-text-align:center;
-width:90%;
-max-width:360px;
-box-shadow:0 0 30px white;
-animation:pop 1s ease;
+
+/* 🎆 Popup */
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+#popup .box{
+  background:#1a001a;
+  border-radius:25px;
+  padding:30px;
+  text-align:center;
+  animation:pop 1s ease;
+  box-shadow:0 0 40px #ff4da6;
 }
 @keyframes pop{
-from{transform:scale(.5);opacity:0;}
-to{transform:scale(1);opacity:1;}
+  from{transform:scale(0.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
 }
 
-/* Fireworks canvas */
-canvas{
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:998;
-}
-
-/* Mobile */
+/* 📱 Mobile */
 @media(max-width:600px){
-.banner{font-size:30px;}
-p{font-size:15px;}
+  .banner{font-size:30px;}
+  .gallery img{height:130px;}
+  .card p{font-size:15px;}
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="fireworks"></canvas>
-
 <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
 
+<div id="countdown"></div>
+
 <div class="card">
+<h2>💖 My Love 💖</h2>
 <p>
-Happy Birthday my LOVE ❤️ my CUTIE 💋 my SWEETHEART 🦋 my DARLING 👀  
-my PRETTIEST WIFEY 🎀  
-<br><br>
-Every day with you is a gift 🥺 I cherish every laugh, every moment, every memory with you 💖  
-You are my best friend, my home, my forever 😭❤️  
-<br><br>
-I LOVE YOU Jaanpakhiii ❤️❤️❤️
+Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
+
+My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
+
+Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
+
+I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
+
+On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
+
+I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
+
+<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
+Once again Happy Birthday my CUTIE 🤍🎀🎀
 </p>
 </div>
 
 <div class="card">
-<h2 style="text-align:center;">⏳ Countdown to 25 May</h2>
-<div id="countdown"></div>
-</div>
-
-<div class="card">
-<h2 style="text-align:center;">📸 Our Memories</h2>
+<h2>📸 Our Memories</h2>
 <div class="gallery">
-<img src="img1.jpg">
-<img src="img2.jpg">
-<img src="img3.jpg">
-<img src="img4.jpg">
-<img src="img5.jpg">
-<img src="img6.jpg">
+  <img src="img1.jpeg">
+  <img src="img2.jpeg">
+  <img src="img3.jpeg">
+  <img src="img4.jpeg">
+  <img src="img5.jpeg">
+  <img src="img6.jpeg">
 </div>
 </div>
 
+<!-- 🎆 Popup -->
 <div id="popup">
-<div id="popupContent">
-<h2>🎂 Happy Birthday PRITHILA 🎆</h2>
-<p>You are the most beautiful part of my life 💖</p>
-</div>
+  <div class="box">
+    <h2>🎂 12:00 AM Surprise 🎂</h2>
+    <p>
+      Happy Birthday PRITHILA 🎀<br>
+      You are my world 💖
+    </p>
+  </div>
 </div>
 
 <script>
-// Floating hearts
+/* ❤️ Hearts */
 setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(15+Math.random()*20)+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},500);
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.innerHTML=["❤️","💖","🌸","🎀"][Math.floor(Math.random()*4)];
+  h.style.animationDuration=4+Math.random()*3+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},400);
 
-// Countdown
-const birthday=new Date("2026-05-25 00:00:00").getTime();
+/* ⏳ Countdown */
+const birthday=new Date("2025-05-25 00:00:00").getTime();
 setInterval(()=>{
-const now=new Date().getTime();
-const d=birthday-now;
-if(d<=0){
-document.getElementById("countdown").innerHTML="🎉 TODAY IS THE DAY 🎉";
-document.getElementById("popup").style.display="flex";
-launchFireworks();
-}else{
-const days=Math.floor(d/(1000*60*60*24));
-const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-const min=Math.floor((d%(1000*60*60))/(1000*60));
-document.getElementById("countdown").innerHTML=
-`${days}d ${hrs}h ${min}m`;
-}
+  const now=new Date().getTime();
+  const d=birthday-now;
+  if(d<=0){
+    document.getElementById("countdown").innerHTML="🎉 IT'S YOUR DAY 🎉";
+    document.getElementById("popup").style.display="flex";
+    return;
+  }
+  const days=Math.floor(d/(1000*60*60*24));
+  const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const mins=Math.floor((d%(1000*60*60))/(1000*60));
+  const secs=Math.floor((d%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML=
+    `⏳ ${days}d ${hrs}h ${mins}m ${secs}s until your birthday 🎂`;
 },1000);
-
-// Fireworks
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;canvas.height=innerHeight;
-function launchFireworks(){
-for(let i=0;i<200;i++){
-setTimeout(()=>{
-ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
-ctx.beginPath();
-ctx.arc(Math.random()*canvas.width,Math.random()*canvas.height,2,0,Math.PI*2);
-ctx.fill();
-},i*20);
-}
-}
 </script>
 
 </body>
