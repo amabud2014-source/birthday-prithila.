@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,15 +17,20 @@ html,body{
   overflow-x:hidden;
 }
 
+/* Center all content on large high-res screens */
 .main-wrapper {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center everything horizontally */
 }
 
 /* Sticky Top Countdown */
 #top-countdown {
   position: sticky;
   top: 0;
+  width: 100%;
   z-index: 1000;
   text-align: center;
   background: rgba(255, 77, 166, 0.25);
@@ -75,8 +80,9 @@ html,body{
 }
 
 .card{
-  margin:20px;
-  padding:30px;
+  width: 90%; /* Keeps cards centered with breathing room */
+  margin: 20px auto;
+  padding: 30px;
   background:rgba(255,255,255,0.08);
   border-radius:30px;
   line-height:1.8;
@@ -84,38 +90,39 @@ html,body{
   border: 1px solid rgba(255, 77, 166, 0.2);
 }
 
-/* --- PERFECT IMAGE FITTING --- */
-.gallery{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* --- PERFECTLY CENTERED GALLERY --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
   padding: 15px;
+  width: 100%;
+  justify-items: center; /* Centers items in grid cells */
+  justify-content: center; /* Centers grid itself */
 }
 
 .photo-frame {
   position: relative;
   width: 100%;
-  height: 450px; 
+  max-width: 450px; /* Prevents photos from getting too wide */
+  height: 550px; /* Deep vertical height for high-res phones */
   background: rgba(255, 255, 255, 0.03); 
   border-radius: 25px;
   overflow: hidden;
   border: 1px solid rgba(255, 77, 166, 0.3);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* Center image vertically */
+  justify-content: center; /* Center image horizontally */
   box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
 .gallery img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 95%; /* Small padding inside frame */
+  max-height: 95%;
   object-fit: contain; 
   transition: transform 0.5s ease;
   z-index: 2;
-}
-
-.photo-frame:hover img {
-  transform: scale(1.08);
+  display: block;
 }
 
 .heart{
@@ -156,8 +163,7 @@ html,body{
 
 @media(max-width:800px){
   .banner{font-size:28px}
-  #top-countdown{font-size: 0.8rem;}
-  .photo-frame{height: 380px;}
+  .photo-frame{height: 450px;} /* Still tall for mobile but fits better */
 }
 </style>
 </head>
@@ -187,7 +193,7 @@ html,body{
   </p>
   </div>
 
-  <div class="card">
+  <div class="card" style="background: transparent; border: none;">
   <div class="gallery">
     <div class="photo-frame"><img src="img1.jpeg"></div>
     <div class="photo-frame"><img src="img2.jpeg"></div>
