@@ -17,7 +17,7 @@ html,body{
   overflow-x:hidden;
 }
 
-/* Sticky Countdown Bar at the very top */
+/* Sticky Countdown Bar */
 #top-countdown {
   position: sticky;
   top: 0;
@@ -33,7 +33,6 @@ html,body{
   text-shadow: 0 0 10px #ff4da6;
 }
 
-/* Banner */
 .banner{
   text-align:center;
   font-size:38px;
@@ -42,7 +41,6 @@ html,body{
   text-shadow:0 0 25px #ff4da6;
 }
 
-/* Main Body Countdown Area */
 #main-countdown-container {
   text-align:center;
   margin-bottom: 20px;
@@ -54,16 +52,14 @@ html,body{
   text-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
 }
 
-/* Glowing Bold Label */
 .countdown-label {
   font-size: 18px;
-  font-weight: 800; /* Bold */
+  font-weight: 800;
   color: #ff4da6;
   display: block;
   margin-top: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  /* Glowing Effect */
   text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff0080;
   animation: glow-pulse 2s ease-in-out infinite alternate;
 }
@@ -73,7 +69,6 @@ html,body{
   to { text-shadow: 0 0 15px #ff4da6, 0 0 30px #ff0080, 0 0 40px #ff0080; }
 }
 
-/* Card Style */
 .card{
   margin:20px;
   padding:25px;
@@ -84,25 +79,29 @@ html,body{
   border: 1px solid rgba(255, 77, 166, 0.2);
 }
 
-/* Gallery */
+/* Updated Gallery for 2048x1602 optimization */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:15px;
+  /* Larger columns for high res */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 10px;
 }
 .gallery img{
   width:100%;
-  height:180px;
+  /* Increased height to look better on 1602px vertical resolution */
+  height: 400px; 
   object-fit:cover;
-  border-radius:20px;
+  border-radius:25px;
+  border: 2px solid rgba(255, 77, 166, 0.3);
   animation:zoom 6s infinite alternate;
 }
+
 @keyframes zoom{
   from{transform:scale(1)}
-  to{transform:scale(1.1)}
+  to{transform:scale(1.05)}
 }
 
-/* Floating hearts */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -114,7 +113,6 @@ html,body{
   to{transform:translateY(-110vh);opacity:0}
 }
 
-/* Popup Overlay */
 #popup{
   position:fixed;
   inset:0;
@@ -133,7 +131,6 @@ html,body{
   border: 2px solid #ff4da6;
 }
 
-/* Fireworks Canvas */
 #fireworks{
   position:fixed;
   inset:0;
@@ -141,12 +138,14 @@ html,body{
   z-index:998;
 }
 
+/* Responsive adjustments for standard mobile */
 @media(max-width:600px){
   .banner{font-size:28px}
   #top-countdown{font-size: 0.85rem;}
   #main-countdown{font-size: 22px;}
   .countdown-label{font-size: 14px;}
-  .gallery img{height:130px}
+  .gallery img{height:250px}
+  .gallery{grid-template-columns: 1fr 1fr;}
 }
 </style>
 </head>
@@ -209,17 +208,12 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 let parts = [];
 
-/* --- POPUP FOR 4 SECONDS ON LOAD --- */
 window.onload = () => {
   popup.style.display = "flex";
   heartFirework(); 
-  
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 4000); 
+  setTimeout(() => { popup.style.display = "none"; }, 4000); 
 };
 
-/* --- FLOATING HEARTS BACKGROUND --- */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
@@ -229,7 +223,6 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },400);
 
-/* --- HEART SHAPED FIREWORKS --- */
 function heartFirework(){
   for(let i=0; i<180; i++){
     const t = Math.random() * Math.PI * 2;
@@ -260,7 +253,6 @@ function animate(){
 }
 animate();
 
-/* --- COUNTDOWN LOGIC --- */
 const targetDate = new Date("May 25, 2026 00:00:00").getTime();
 
 const timer = setInterval(() => {
@@ -281,7 +273,6 @@ const timer = setInterval(() => {
   const s = Math.floor((diff % (1000 * 60)) / 1000);
 
   const timeString = `${d}d ${h}h ${m}m ${s}s`;
-  
   topBar.innerHTML = `⏳ ${timeString} until your birthday 25 May 🎂`;
   mainDisplay.innerHTML = timeString;
 }, 1000);
