@@ -45,6 +45,32 @@ html,body{
   box-shadow:0 0 15px #ff4da6;
 }
 
+/* Birthday Animation Text */
+#bdayText{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.5);
+  font-size:40px;
+  font-weight:900;
+  text-align:center;
+  color:#ff4da6;
+  text-shadow:0 0 30px #ff4da6;
+  opacity:0;
+  z-index:1000;
+}
+
+.showText{
+  animation:bdayAnim 4s ease forwards;
+}
+
+@keyframes bdayAnim{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(0.5);}
+  30%{opacity:1; transform:translate(-50%,-50%) scale(1.2);}
+  60%{transform:translate(-50%,-50%) scale(1);}
+  100%{opacity:0; transform:translate(-50%,-50%) scale(0.8);}
+}
+
 /* Card */
 .card{
   margin:20px;
@@ -113,6 +139,7 @@ html,body{
 /* Mobile */
 @media(max-width:600px){
   .banner{font-size:28px}
+  #bdayText{font-size:28px}
   .gallery img{height:130px}
 }
 </style>
@@ -124,22 +151,12 @@ html,body{
 <div id="clock"></div>
 <div id="countdown"></div>
 
+<div id="bdayText">It’s your birthday BAEBE💋</div>
+
 <div class="card">
 <p>
 Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
-
-My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
-
-Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
-
-I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
-
-On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
-
-I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
-
-<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
-Once again Happy Birthday my CUTIE 🤍🎀🎀
+My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀
 </p>
 </div>
 
@@ -158,10 +175,7 @@ Once again Happy Birthday my CUTIE 🤍🎀🎀
 <div id="popup">
   <div class="box">
     <h2>🎂 Happy Birthday 🎂</h2>
-    <p>
-      Happy Birthday Moynapakhiiiii &lt;3<br>
-      I love you FOREVER my PRETTIEST WIFEY 💋
-    </p>
+    <p>I love you FOREVER my PRETTIEST WIFEY 💋</p>
   </div>
 </div>
 
@@ -178,7 +192,7 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },400);
 
-/* Live clock */
+/* Clock */
 function clock(){
   const d=new Date();
   document.getElementById("clock").innerHTML=
@@ -186,7 +200,7 @@ function clock(){
 }
 setInterval(clock,1000); clock();
 
-/* Fireworks (heart shape) */
+/* Fireworks */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 canvas.width=innerWidth;
@@ -223,24 +237,41 @@ function animate(){
 animate();
 
 /* 🎂 Countdown */
-const birthday = new Date("2025-05-25T00:00:00").getTime();
 const countdown=document.getElementById("countdown");
 const popup=document.getElementById("popup");
+const bdayText=document.getElementById("bdayText");
 let done=false;
+
+function getNextBirthday(){
+  const now=new Date();
+  let year=now.getFullYear();
+  let birthday=new Date(year,4,25,0,0,0);
+  if(now>birthday){
+    birthday=new Date(year+1,4,25,0,0,0);
+  }
+  return birthday.getTime();
+}
+
+let birthday=getNextBirthday();
 
 const timer=setInterval(()=>{
   const now=Date.now();
   const diff=birthday-now;
 
   if(diff<=0){
-    countdown.innerHTML=
-      "🎉 Happy Birthday Moynapakhiiiii &lt;3<br>I love you FOREVER my PRETTIEST WIFEY 💋";
+    countdown.innerHTML="🎉 Happy Birthday BAEBE 💋";
+
     if(!done){
       done=true;
+
       popup.style.display="flex";
+      bdayText.classList.add("showText");
+
       heartFirework();
       clearInterval(timer);
-      setTimeout(()=>popup.style.display="none",4000); // ✅ 4 seconds
+
+      setTimeout(()=>popup.style.display="none",4000);
+      setTimeout(()=>bdayText.classList.remove("showText"),4000);
     }
     return;
   }
@@ -251,7 +282,7 @@ const timer=setInterval(()=>{
   const s=Math.floor(diff%60000/1000);
 
   countdown.innerHTML=
-    `⏳ ${d}d ${h}h ${m}m ${s}s until your birthday 🎂`;
+    `⏳ ${d}d ${h}h ${m}m ${s}s until 25 May 🎂`;
 },1000);
 </script>
 
