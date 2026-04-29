@@ -222,7 +222,7 @@ function animate(){
 }
 animate();
 
-/* 🎂 Countdown (FIXED) */
+/* 🎂 Countdown */
 const birthday = new Date("2025-05-25T00:00:00").getTime();
 const countdown=document.getElementById("countdown");
 const popup=document.getElementById("popup");
@@ -240,7 +240,7 @@ const timer=setInterval(()=>{
       popup.style.display="flex";
       heartFirework();
       clearInterval(timer);
-      setTimeout(()=>popup.style.display="none",10000);
+      setTimeout(()=>popup.style.display="none",4000); // ✅ 4 seconds
     }
     return;
   }
