@@ -17,15 +17,20 @@ html,body{
   overflow-x:hidden;
 }
 
-/* Sticky Countdown Bar */
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sticky Top Countdown */
 #top-countdown {
   position: sticky;
   top: 0;
   z-index: 1000;
   text-align: center;
-  background: rgba(255, 77, 166, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 12px;
+  background: rgba(255, 77, 166, 0.25);
+  backdrop-filter: blur(15px);
+  padding: 15px;
   font-weight: bold;
   font-size: 1.1rem;
   border-bottom: 2px solid #ff4da6;
@@ -36,14 +41,14 @@ html,body{
 .banner{
   text-align:center;
   font-size:38px;
-  padding:30px 10px 10px 10px;
+  padding:40px 10px 10px 10px;
   font-weight:800;
   text-shadow:0 0 25px #ff4da6;
 }
 
 #main-countdown-container {
   text-align:center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 #main-countdown {
   font-size:32px;
@@ -57,10 +62,10 @@ html,body{
   font-weight: 800;
   color: #ff4da6;
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff0080;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
   animation: glow-pulse 2s ease-in-out infinite alternate;
 }
 
@@ -71,81 +76,89 @@ html,body{
 
 .card{
   margin:20px;
-  padding:25px;
+  padding:30px;
   background:rgba(255,255,255,0.08);
-  border-radius:25px;
+  border-radius:30px;
   line-height:1.8;
   text-align:center;
   border: 1px solid rgba(255, 77, 166, 0.2);
 }
 
-/* Optimized Gallery for 2316x3088 (Portrait High-Res) */
-.gallery {
-  display: grid;
-  /* Two clear columns for high-res mobile portrait */
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+/* --- PERFECTED GALLERY --- */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
   padding: 10px;
 }
 
-.gallery img {
+.photo-frame {
   width: 100%;
-  /* Increased height for tall mobile screens */
-  height: 500px; 
-  object-fit: cover;
-  border-radius: 20px;
-  border: 2px solid rgba(255, 77, 166, 0.4);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  height: 500px; /* High resolution vertical height */
+  background: rgba(255, 77, 166, 0.05); /* Soft glow behind photo */
+  border-radius: 25px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 77, 166, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.gallery img {
+  max-width: 100%;
+  max-height: 100%;
+  /* "contain" ensures the full photo is shown without cropping */
+  object-fit: contain; 
   animation: zoom 6s infinite alternate;
 }
 
-@keyframes zoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
+@keyframes zoom{
+  from{transform:scale(1)}
+  to{transform:scale(1.05)}
 }
 
-.heart {
-  position: fixed;
-  bottom: -20px;
-  font-size: 18px;
-  animation: float 6s linear infinite;
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:float 6s linear infinite;
   z-index: 997;
 }
-@keyframes float {
-  to { transform: translateY(-110vh); opacity: 0; }
+@keyframes float{
+  to{transform:translateY(-110vh);opacity:0}
 }
 
-#popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  display: none; 
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.96);
+  display:none; 
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
-#popup .box {
-  padding: 40px;
-  background: #1a001a;
-  border-radius: 30px;
-  text-align: center;
-  box-shadow: 0 0 50px #ff4da6;
+#popup .box{
+  padding:45px;
+  background:#1a001a;
+  border-radius:35px;
+  text-align:center;
+  box-shadow:0 0 60px #ff4da6;
   border: 2px solid #ff4da6;
 }
 
-#fireworks {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 998;
+#fireworks{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:998;
 }
 
-/* Specific Media Query for phones */
-@media(max-width: 768px) {
-  .banner { font-size: 28px; }
-  #top-countdown { font-size: 0.85rem; }
-  #main-countdown { font-size: 24px; }
-  .gallery img { height: 400px; } /* Slightly shorter for smaller viewports */
+@media(max-width:800px){
+  .banner{font-size:30px}
+  #top-countdown{font-size: 0.9rem;}
+  #main-countdown{font-size: 24px;}
+  .photo-frame{height: 400px;} /* Adjusted for smaller phone views */
 }
 </style>
 </head>
@@ -154,41 +167,43 @@ html,body{
 
 <div id="top-countdown">Calculating...</div>
 
-<div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
+<div class="main-wrapper">
+  <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
 
-<div id="main-countdown-container">
-  <div id="main-countdown">00d 00h 00m 00s</div>
-  <span class="countdown-label">until your birthday 25 May 🎂</span>
-</div>
+  <div id="main-countdown-container">
+    <div id="main-countdown">00d 00h 00m 00s</div>
+    <span class="countdown-label">until your birthday 25 May 🎂</span>
+  </div>
 
-<div class="card">
-<p>
-Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
-My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
-Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
-I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
-On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
-I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
-<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
-Once again Happy Birthday my CUTIE 🤍🎀🎀
-</p>
-</div>
+  <div class="card">
+  <p>
+  Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
+  My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
+  Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
+  I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
+  On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
+  I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
+  <b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
+  Once again Happy Birthday my CUTIE 🤍🎀🎀
+  </p>
+  </div>
 
-<div class="card">
-<div class="gallery">
-  <img src="img1.jpeg" alt="Photo 1">
-  <img src="img2.jpeg" alt="Photo 2">
-  <img src="img3.jpeg" alt="Photo 3">
-  <img src="img4.jpeg" alt="Photo 4">
-  <img src="img5.jpeg" alt="Photo 5">
-  <img src="img6.jpeg" alt="Photo 6">
-</div>
+  <div class="card">
+  <div class="gallery">
+    <div class="photo-frame"><img src="img1.jpeg"></div>
+    <div class="photo-frame"><img src="img2.jpeg"></div>
+    <div class="photo-frame"><img src="img3.jpeg"></div>
+    <div class="photo-frame"><img src="img4.jpeg"></div>
+    <div class="photo-frame"><img src="img5.jpeg"></div>
+    <div class="photo-frame"><img src="img6.jpeg"></div>
+  </div>
+  </div>
 </div>
 
 <div id="popup">
   <div class="box">
-    <h1 style="color:#ff4da6; text-shadow: 0 0 10px #ff4da6;">🎂 Happy Birthday 🎂</h1>
-    <p style="font-size: 1.2rem;">
+    <h1 style="color:#ff4da6; text-shadow: 0 0 15px #ff4da6;">🎂 Happy Birthday 🎂</h1>
+    <p style="font-size: 1.3rem; color: #fff;">
       Happy Birthday Moynapakhiiiii &lt;3<br><br>
       I love you FOREVER my PRETTIEST WIFEY 💋
     </p>
@@ -224,7 +239,7 @@ setInterval(()=>{
 },400);
 
 function heartFirework(){
-  for(let i=0; i<180; i++){
+  for(let i=0; i<200; i++){
     const t = Math.random() * Math.PI * 2;
     const r = 16 * (1 - Math.sin(t));
     parts.push({
@@ -242,10 +257,10 @@ function animate(){
   parts.forEach((p,i)=>{
     p.x += p.vx * 0.05;
     p.y += p.vy * 0.05;
-    p.a -= 0.01;
+    p.a -= 0.008;
     ctx.fillStyle = `rgba(255,80,150,${p.a})`;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+    ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2);
     ctx.fill();
     if(p.a <= 0) parts.splice(i,1);
   });
