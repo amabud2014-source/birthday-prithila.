@@ -43,6 +43,14 @@ html,body{
   to{text-shadow:0 0 30px #ff99cc;}
 }
 
+/* 🕒 Clock */
+#liveClock{
+  text-align:center;
+  font-size:18px;
+  color:#ffd6eb;
+  margin-bottom:10px;
+}
+
 /* 🌸 Card */
 .card{
   background:rgba(255,255,255,0.08);
@@ -57,15 +65,15 @@ html,body{
   to{opacity:1;transform:translateY(0);}
 }
 
-.card h2{
+/* ⏳ Countdown */
+#countdown{
   text-align:center;
-  color:#ffb3d9;
-}
-
-.card p{
-  line-height:1.8;
-  font-size:16px;
-  text-align:center;
+  font-size:20px;
+  margin:20px;
+  padding:15px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  box-shadow:0 0 15px #ff4da6;
 }
 
 /* 📸 Gallery */
@@ -73,7 +81,6 @@ html,body{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:15px;
-  margin-top:20px;
 }
 .gallery img{
   width:100%;
@@ -85,14 +92,6 @@ html,body{
 @keyframes zoom{
   from{transform:scale(1);}
   to{transform:scale(1.1);}
-}
-
-/* ⏳ Countdown */
-#countdown{
-  text-align:center;
-  font-size:20px;
-  margin:20px;
-  color:#ffd1ea;
 }
 
 /* 🎆 Popup */
@@ -118,11 +117,18 @@ html,body{
   to{transform:scale(1);opacity:1;}
 }
 
+/* 🎆 Fireworks Canvas */
+#fireworks{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:998;
+}
+
 /* 📱 Mobile */
 @media(max-width:600px){
   .banner{font-size:30px;}
   .gallery img{height:130px;}
-  .card p{font-size:15px;}
 }
 </style>
 </head>
@@ -130,12 +136,11 @@ html,body{
 <body>
 
 <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
-
+<div id="liveClock"></div>
 <div id="countdown"></div>
 
 <div class="card">
-<h2>💖 My Love 💖</h2>
-<p>
+<p style="text-align:center;line-height:1.8;">
 Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
 
 My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
@@ -154,7 +159,6 @@ Once again Happy Birthday my CUTIE 🤍🎀🎀
 </div>
 
 <div class="card">
-<h2>📸 Our Memories</h2>
 <div class="gallery">
   <img src="img1.jpeg">
   <img src="img2.jpeg">
@@ -168,42 +172,95 @@ Once again Happy Birthday my CUTIE 🤍🎀🎀
 <!-- 🎆 Popup -->
 <div id="popup">
   <div class="box">
-    <h2>🎂 12:00 AM Surprise 🎂</h2>
+    <h2>🎂 Happy Birthday 🎂</h2>
     <p>
-      Happy Birthday PRITHILA 🎀<br>
-      You are my world 💖
+      Happy Birthday Moynapakhiiiii &lt;3<br>
+      I love you FOREVER my PRETTIEST WIFEY 💋
     </p>
   </div>
 </div>
 
+<canvas id="fireworks"></canvas>
+
 <script>
-/* ❤️ Hearts */
+/* ❤️ Floating hearts */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
   h.style.left=Math.random()*100+"vw";
-  h.innerHTML=["❤️","💖","🌸","🎀"][Math.floor(Math.random()*4)];
+  h.innerHTML="💖";
   h.style.animationDuration=4+Math.random()*3+"s";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),7000);
 },400);
 
-/* ⏳ Countdown */
+/* 🕒 Live clock */
+function updateClock(){
+  const n=new Date();
+  document.getElementById("liveClock").innerHTML=
+    `🕒 ${n.toLocaleTimeString()} <br> 📅 ${n.toDateString()}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+/* 💓 Heart Fireworks */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+let particles=[];
+
+function heartFirework(){
+  for(let i=0;i<200;i++){
+    const t=Math.random()*Math.PI*2;
+    const r=16*(1-Math.sin(t));
+    particles.push({
+      x:canvas.width/2,
+      y:canvas.height/2,
+      vx:r*Math.cos(t),
+      vy:-r*Math.sin(t),
+      a:1
+    });
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x+=p.vx*0.05;
+    p.y+=p.vy*0.05;
+    p.a-=0.01;
+    ctx.fillStyle=`rgba(255,80,150,${p.a})`;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fill();
+    if(p.a<=0)particles.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ⏳ Countdown logic */
 const birthday=new Date("2025-05-25 00:00:00").getTime();
 setInterval(()=>{
-  const now=new Date().getTime();
-  const d=birthday-now;
-  if(d<=0){
-    document.getElementById("countdown").innerHTML="🎉 IT'S YOUR DAY 🎉";
+  const now=Date.now();
+  const diff=birthday-now;
+
+  if(diff<=0){
+    document.getElementById("countdown").innerHTML=
+      "🎉 Happy Birthday Moynapakhiiiii &lt;3<br>I love you FOREVER my PRETTIEST WIFEY 💋";
     document.getElementById("popup").style.display="flex";
+    heartFirework();
     return;
   }
-  const days=Math.floor(d/(1000*60*60*24));
-  const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-  const mins=Math.floor((d%(1000*60*60))/(1000*60));
-  const secs=Math.floor((d%(1000*60))/1000);
+
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+
   document.getElementById("countdown").innerHTML=
-    `⏳ ${days}d ${hrs}h ${mins}m ${secs}s until your birthday 🎂`;
+    `⏳ ${d}d ${h}h ${m}m ${s}s until your birthday 🎂`;
 },1000);
 </script>
 
