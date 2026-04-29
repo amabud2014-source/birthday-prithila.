@@ -42,7 +42,7 @@ html,body{
   text-shadow:0 0 25px #ff4da6;
 }
 
-/* Main Body Countdown */
+/* Main Body Countdown Area */
 #main-countdown-container {
   text-align:center;
   margin-bottom: 20px;
@@ -51,16 +51,29 @@ html,body{
   font-size:28px;
   font-weight: bold;
   color:#ff4da6;
-  text-shadow: 0 0 15px rgba(255, 77, 166, 0.6);
-}
-.countdown-label {
-  font-size: 16px;
-  color: #ffd6eb;
-  display: block;
-  margin-top: 5px;
+  text-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
 }
 
-/* Card */
+/* Glowing Bold Label */
+.countdown-label {
+  font-size: 18px;
+  font-weight: 800; /* Bold */
+  color: #ff4da6;
+  display: block;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  /* Glowing Effect */
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff0080;
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from { text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6; }
+  to { text-shadow: 0 0 15px #ff4da6, 0 0 30px #ff0080, 0 0 40px #ff0080; }
+}
+
+/* Card Style */
 .card{
   margin:20px;
   padding:25px;
@@ -105,7 +118,7 @@ html,body{
 #popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.9);
+  background:rgba(0,0,0,0.95);
   display:none; 
   align-items:center;
   justify-content:center;
@@ -128,11 +141,11 @@ html,body{
   z-index:998;
 }
 
-/* Mobile Adjustments */
 @media(max-width:600px){
   .banner{font-size:28px}
   #top-countdown{font-size: 0.85rem;}
   #main-countdown{font-size: 22px;}
+  .countdown-label{font-size: 14px;}
   .gallery img{height:130px}
 }
 </style>
@@ -164,18 +177,18 @@ Once again Happy Birthday my CUTIE 🤍🎀🎀
 
 <div class="card">
 <div class="gallery">
-  <img src="img1.jpeg" alt="Memory 1">
-  <img src="img2.jpeg" alt="Memory 2">
-  <img src="img3.jpeg" alt="Memory 3">
-  <img src="img4.jpeg" alt="Memory 4">
-  <img src="img5.jpeg" alt="Memory 5">
-  <img src="img6.jpeg" alt="Memory 6">
+  <img src="img1.jpeg" alt="Photo 1">
+  <img src="img2.jpeg" alt="Photo 2">
+  <img src="img3.jpeg" alt="Photo 3">
+  <img src="img4.jpeg" alt="Photo 4">
+  <img src="img5.jpeg" alt="Photo 5">
+  <img src="img6.jpeg" alt="Photo 6">
 </div>
 </div>
 
 <div id="popup">
   <div class="box">
-    <h1 style="color:#ff4da6;">🎂 Happy Birthday 🎂</h1>
+    <h1 style="color:#ff4da6; text-shadow: 0 0 10px #ff4da6;">🎂 Happy Birthday 🎂</h1>
     <p style="font-size: 1.2rem;">
       Happy Birthday Moynapakhiiiii &lt;3<br><br>
       I love you FOREVER my PRETTIEST WIFEY 💋
