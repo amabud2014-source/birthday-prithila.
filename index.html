@@ -17,15 +17,23 @@ html,body{
   overflow-x:hidden;
 }
 
-/* Sticky Countdown Bar at the very top */
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #top-countdown {
   position: sticky;
   top: 0;
+  width: 100%;
   z-index: 1000;
   text-align: center;
-  background: rgba(255, 77, 166, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 12px;
+  background: rgba(255, 77, 166, 0.25);
+  backdrop-filter: blur(15px);
+  padding: 15px;
   font-weight: bold;
   font-size: 1.1rem;
   border-bottom: 2px solid #ff4da6;
@@ -33,80 +41,80 @@ html,body{
   text-shadow: 0 0 10px #ff4da6;
 }
 
-/* Banner */
 .banner{
   text-align:center;
   font-size:38px;
-  padding:30px 10px 10px 10px;
+  padding:40px 10px 10px 10px;
   font-weight:800;
   text-shadow:0 0 25px #ff4da6;
 }
 
-/* Main Body Countdown Area */
 #main-countdown-container {
   text-align:center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 #main-countdown {
-  font-size:28px;
+  font-size:32px;
   font-weight: bold;
   color:#ff4da6;
   text-shadow: 0 0 15px rgba(255, 77, 166, 0.8);
 }
 
-/* Glowing Bold Label */
 .countdown-label {
   font-size: 18px;
-  font-weight: 800; /* Bold */
+  font-weight: 800;
   color: #ff4da6;
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  /* Glowing Effect */
-  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 30px #ff0080;
-  animation: glow-pulse 2s ease-in-out infinite alternate;
+  letter-spacing: 2px;
 }
 
-@keyframes glow-pulse {
-  from { text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6; }
-  to { text-shadow: 0 0 15px #ff4da6, 0 0 30px #ff0080, 0 0 40px #ff0080; }
-}
-
-/* Card Style */
 .card{
-  margin:20px;
-  padding:25px;
+  width: 90%;
+  margin: 20px auto;
+  padding: 30px;
   background:rgba(255,255,255,0.08);
-  border-radius:25px;
+  border-radius:30px;
   line-height:1.8;
   text-align:center;
   border: 1px solid rgba(255, 77, 166, 0.2);
 }
 
-/* Gallery */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:15px;
-}
-.gallery img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:20px;
-  animation:zoom 6s infinite alternate;
-}
-@keyframes zoom{
-  from{transform:scale(1)}
-  to{transform:scale(1.1)}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 15px;
+  width: 100%;
+  justify-items: center;
 }
 
-/* Floating hearts */
+.photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 550px;
+  background: rgba(255, 255, 255, 0.03); 
+  border-radius: 25px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 77, 166, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.gallery img {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain; 
+}
+
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:18px;
+  font-size:22px;
   animation:float 6s linear infinite;
   z-index: 997;
 }
@@ -114,39 +122,39 @@ html,body{
   to{transform:translateY(-110vh);opacity:0}
 }
 
-/* Popup Overlay */
-#popup{
+/* Surprising Overlay */
+#birthday-overlay {
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.95);
+  background:rgba(0,0,0,0.9);
   display:none; 
+  flex-direction: column;
   align-items:center;
   justify-content:center;
-  z-index:9999;
+  z-index:10000;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
 }
-#popup .box{
-  padding:40px;
-  background:#1a001a;
-  border-radius:30px;
-  text-align:center;
-  box-shadow:0 0 50px #ff4da6;
-  border: 2px solid #ff4da6;
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+#birthday-overlay h1 {
+  font-size: 4rem;
+  color: #ff4da6;
+  text-shadow: 0 0 20px #ff4da6, 0 0 40px #ff0080;
+  margin-bottom: 20px;
 }
 
-/* Fireworks Canvas */
 #fireworks{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:998;
+  z-index: 999;
 }
 
-@media(max-width:600px){
+@media(max-width:800px){
   .banner{font-size:28px}
-  #top-countdown{font-size: 0.85rem;}
-  #main-countdown{font-size: 22px;}
-  .countdown-label{font-size: 14px;}
-  .gallery img{height:130px}
+  .photo-frame{height: 450px;}
+  #birthday-overlay h1 { font-size: 2.5rem; }
 }
 </style>
 </head>
@@ -155,88 +163,66 @@ html,body{
 
 <div id="top-countdown">Calculating...</div>
 
-<div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
+<div class="main-wrapper">
+  <div class="banner">🎉 Happy Birthday PRITHILA 🎀</div>
 
-<div id="main-countdown-container">
-  <div id="main-countdown">00d 00h 00m 00s</div>
-  <span class="countdown-label">until your birthday 25 May 🎂</span>
-</div>
-
-<div class="card">
-<p>
-Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br><br>
-My CUTIE 💋, my SWEETHEART 🦋, my DARLING 👀, and forever my PRETTIEST WIFEY 🎀<br><br>
-Another year, another beautiful chapter of you — wiser, stronger, and even more stunning than before. Every single day with you feels like a blessing 🥺, and I truly can’t imagine my life without you 😭<br><br>
-I hold onto every moment we share — the laughter, the little talks, the memories we create together. You make everything brighter, warmer, and more meaningful 😊❤️ Thank you for loving me, supporting me, and turning our world into such a comforting, happy place<br><br>
-On your special day, I just want you to know how deeply I love you 💖 and how thankful I am for you. You are not just my partner — you are my best friend, my safe place, my everything<br><br>
-I pray this year fills your life with endless happiness, smiles, and all the beautiful things you deserve 🎀<br><br>
-<b>I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</b><br>
-Once again Happy Birthday my CUTIE 🤍🎀🎀
-</p>
-</div>
-
-<div class="card">
-<div class="gallery">
-  <img src="img1.jpeg" alt="Photo 1">
-  <img src="img2.jpeg" alt="Photo 2">
-  <img src="img3.jpeg" alt="Photo 3">
-  <img src="img4.jpeg" alt="Photo 4">
-  <img src="img5.jpeg" alt="Photo 5">
-  <img src="img6.jpeg" alt="Photo 6">
-</div>
-</div>
-
-<div id="popup">
-  <div class="box">
-    <h1 style="color:#ff4da6; text-shadow: 0 0 10px #ff4da6;">🎂 Happy Birthday 🎂</h1>
-    <p style="font-size: 1.2rem;">
-      Happy Birthday Moynapakhiiiii &lt;3<br><br>
-      I love you FOREVER my PRETTIEST WIFEY 💋
-    </p>
+  <div id="main-countdown-container">
+    <div id="main-countdown">00d 00h 00m 00s</div>
+    <span class="countdown-label" id="timer-tag">until your birthday 25 May 🎂</span>
   </div>
+
+  <div class="card">
+    <p>Happy Birthday <b>PRITHILA &lt;3</b> my LOVE ❤️<br>
+    I LOVE YOU so much Jaanpakhiii ❤️❤️❤️</p>
+  </div>
+
+  <div class="card" style="background: transparent; border: none;">
+    <div class="gallery">
+      <div class="photo-frame"><img src="img1.jpeg"></div>
+      <div class="photo-frame"><img src="img2.jpeg"></div>
+      <div class="photo-frame"><img src="img3.jpeg"></div>
+      <div class="photo-frame"><img src="img4.jpeg"></div>
+      <div class="photo-frame"><img src="img5.jpeg"></div>
+      <div class="photo-frame"><img src="img6.jpeg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SURPRISE OVERLAY -->
+<div id="birthday-overlay">
+  <h1>IT'S 25 MAY!<br>HAPPY BIRTHDAY<br>PRITHILA 🎀</h1>
+  <p style="font-size: 1.5rem;">The world got brighter the day you were born! 🎂</p>
+  <button onclick="document.getElementById('birthday-overlay').style.display='none'" 
+    style="margin-top: 30px; padding: 10px 25px; border-radius: 20px; border: none; background: #ff4da6; color: white; font-weight: bold; cursor: pointer;">
+    Close Surprise
+  </button>
 </div>
 
 <canvas id="fireworks"></canvas>
 
 <script>
-const popup = document.getElementById("popup");
 const topBar = document.getElementById("top-countdown");
 const mainDisplay = document.getElementById("main-countdown");
+const timerTag = document.getElementById("timer-tag");
+const overlay = document.getElementById("birthday-overlay");
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 let parts = [];
+let isBirthday = false;
 
-/* --- POPUP FOR 4 SECONDS ON LOAD --- */
-window.onload = () => {
-  popup.style.display = "flex";
-  heartFirework(); 
-  
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 4000); 
-};
+// Target: 25th May 12:00 AM
+const targetDate = new Date("May 25, 2026 00:00:00").getTime();
 
-/* --- FLOATING HEARTS BACKGROUND --- */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.style.left=Math.random()*100+"vw";
-  h.innerHTML="💖";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},400);
-
-/* --- HEART SHAPED FIREWORKS --- */
-function heartFirework(){
-  for(let i=0; i<180; i++){
+function heartFirework(customX, customY){
+  for(let i=0; i<150; i++){
     const t = Math.random() * Math.PI * 2;
     const r = 16 * (1 - Math.sin(t));
     parts.push({
-      x: canvas.width/2,
-      y: canvas.height/2,
+      x: customX || canvas.width/2,
+      y: customY || canvas.height/2,
       vx: r * Math.cos(t),
       vy: -r * Math.sin(t),
       a: 1
@@ -244,34 +230,18 @@ function heartFirework(){
   }
 }
 
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  parts.forEach((p,i)=>{
-    p.x += p.vx * 0.05;
-    p.y += p.vy * 0.05;
-    p.a -= 0.01;
-    ctx.fillStyle = `rgba(255,80,150,${p.a})`;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-    ctx.fill();
-    if(p.a <= 0) parts.splice(i,1);
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-
-/* --- COUNTDOWN LOGIC --- */
-const targetDate = new Date("May 25, 2026 00:00:00").getTime();
-
 const timer = setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
 
   if (diff <= 0) {
+    if(!isBirthday) {
+      isBirthday = true;
+      triggerSurprise();
+    }
     topBar.innerHTML = "🎉 HAPPY BIRTHDAY PRITHILA! ❤️";
-    mainDisplay.innerHTML = "🎉 IT'S YOUR SPECIAL DAY! 🎂";
-    document.querySelector('.countdown-label').style.display = 'none';
-    clearInterval(timer);
+    mainDisplay.innerHTML = "🎉 MAY 25: YOUR DAY! 🎂";
+    timerTag.style.display = 'none';
     return;
   }
 
@@ -281,15 +251,45 @@ const timer = setInterval(() => {
   const s = Math.floor((diff % (1000 * 60)) / 1000);
 
   const timeString = `${d}d ${h}h ${m}m ${s}s`;
-  
-  topBar.innerHTML = `⏳ ${timeString} until your birthday 25 May 🎂`;
+  topBar.innerHTML = `⏳ ${timeString} until 25 May 🎂`;
   mainDisplay.innerHTML = timeString;
 }, 1000);
 
+function triggerSurprise() {
+  overlay.style.display = "flex";
+  // Launch multiple fireworks
+  setInterval(() => {
+    heartFirework(Math.random()*canvas.width, Math.random()*canvas.height);
+  }, 2000);
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  parts.forEach((p,i)=>{
+    p.x += p.vx * 0.05;
+    p.y += p.vy * 0.05;
+    p.a -= 0.008;
+    ctx.fillStyle = `rgba(255,80,150,${p.a})`;
+    ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
+    if(p.a <= 0) parts.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
 window.addEventListener('resize', () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
+  canvas.width = innerWidth; canvas.height = innerHeight;
 });
+
+// Floating hearts logic
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.innerHTML="💖";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
 </script>
 
 </body>
